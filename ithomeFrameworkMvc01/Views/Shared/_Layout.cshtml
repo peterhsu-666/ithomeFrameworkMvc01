@@ -1,16 +1,21 @@
 ﻿<!DOCTYPE html>
+@{
+    var datetime = DateTime.Now.ToString("yyyMMddHHmmss");
+}
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Home/Home.css?" + @datetime)
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery-3.4.1.min.js?" + @datetime)
 </head>
-
-<body>@RenderBody()</body>
+<body>
+    <div style="font-family: Consolas;font-size:20px">
+        @RenderBody()
+    </div>
+</body>
 </html>
-@{
-    var datetime = DateTime.Now.ToString("yyyMMddHHmmss");
-}
-<script src="/Scripts/jquery-3.4.1.min.js?@datetime"></script>

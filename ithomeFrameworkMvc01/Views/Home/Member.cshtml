@@ -1,0 +1,62 @@
+﻿@model ithomeFrameworkMvc01.Models.Home.MemberModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var datetime = DateTime.Now.ToString("yyyMMddHHmmss");
+
+    var list = ViewBag.List;
+
+    var cityList = ViewBag.CityList;
+
+
+}
+
+<script src="/Scripts/Home/Member.js?@datetime"></script>
+
+<form action="/Home/Member" method="post">
+    <h1>Input User Data</h1>
+
+    <div style="color:red">
+        @Html.ValidationSummary(true)
+    </div>
+
+    <label>Account</label>
+    <br />
+    @Html.EditorFor(model => model.Account)
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Account)</span>
+    <br />
+    <label>Password</label>
+    <br />
+    <input type="password" name="Password" value="@Model.Password" />
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Password)</span>
+    <br />
+    <label>Again Password</label>
+    <br />
+    <input type="password" name="AgainPassword" value="@Model.AgainPassword"/>
+    <span style="color:red">@Html.ValidationMessageFor(model => model.AgainPassword)</span>
+    <br />
+    <label>Address</label>
+    <select name="City">
+        <option value=""></option>
+        @if (cityList != null)
+        {
+            foreach (var c in cityList)
+            {
+                <option value="@c.CityId">@c.CityName</option>
+            }
+        }
+    </select>
+    <span style="color:red">@Html.ValidationMessageFor(model => model.City)</span>
+    <select name="Village">
+        <option value=""></option>
+    </select>
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Village)</span>
+    <br />
+    <input type="text" name="Address" value="@Model.Address" />
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Address)</span>
+    <br />
+    <input type="submit" class="btnBlue" value="Sure" />
+    <input type="button" class="btnGreen" value="Clear" />
+    <a href="/Home/Index">Login</a>
+</form>

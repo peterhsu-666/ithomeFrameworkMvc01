@@ -17,7 +17,7 @@
 
                     $('[name=Village]').find('option').remove();
 
-                    $('[name="Village"]').append("<option value=''>請選擇</option>");
+                    $('[name="Village"]').append("<option value=''></option>");
 
                     data.forEach(function (el) {
                         var option = document.createElement('option');

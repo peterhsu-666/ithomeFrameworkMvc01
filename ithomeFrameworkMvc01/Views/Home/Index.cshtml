@@ -1,49 +1,32 @@
-﻿@model ithomeFrameworkMvc01.Models.Student
-
+﻿@model ithomeFrameworkMvc01.Models.Home.IndexModel
 @{
-    ViewBag.Title = "Home Page";
-    Layout = null;
-
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var datetime = DateTime.Now.ToString("yyyMMddHHmmss");
-
-    var list = ViewBag.List;
-
-    var cityList = ViewBag.CityList;
-
-
+    var msg = ViewBag.Msg;
 }
 
-<script src="/Scripts/jquery-3.4.1.min.js?@datetime"></script>
-<script src="/Scripts/Home/Home.js?@datetime"></script>
+@Styles.Render("~/Scripts/Home/Index.js?" + @datetime)
 
-<h1>Input User Data</h1>
+<h1>Login</h1>
 
-<label>Account</label>
-<br />
-<input type="text" name="Account" />
-<br />
-<label>Password</label>
-<br />
-<input type="text" name="Password" />
-<br />
-<label>Again Password</label>
-<br />
-<input type="text" name="AgainPassword" />
-<br />
-<label>Address</label>
-<select name="City">
-    <option value="">請選擇</option>
-    @foreach (var c in cityList)
-    {
-        <option value="@c.CityId">@c.CityName</option>
-    }
-</select>
-<select name="Village">
-    <option value="">請選擇</option>
-</select>
-<br />
-<input type="text" name="Address" />
-<br />
-<input type="submit" value="確定"/>
-<input type="button" value="清除"/>
+<div style="color:red">
+    @Html.ValidationSummary(true)
+    @msg
+</div>
+
+<form action="/Home/Login" method="post">
+    <label>Account</label>
+    <br />
+    <input type="text" name="Account" placeholder="Input Account" />
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Account)</span>
+    <br />
+    <label>Password</label>
+    <br />
+    <input type="password" name="Password" placeholder="Input Password" />
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Password)</span>
+    <br />
+    <input type="submit" class="btnBlue" value="Sure" />
+    <a href="/Home/Member">Sign Up</a>
+</form>
+@*<input type="submit" value="Sign Up" id="SignUp" name="SignUp" />*@
 
